@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -28,9 +29,11 @@ namespace Copy2Esemptia
         {
             try
             {
-                _backgroundWorker = new BackgroundWorker();
-                _backgroundWorker.WorkerReportsProgress = true;
-                _backgroundWorker.WorkerSupportsCancellation = true;
+                _backgroundWorker = new BackgroundWorker
+                {
+                    WorkerReportsProgress = true,
+                    WorkerSupportsCancellation = true
+                };
 
                 _backgroundWorker.DoWork += BackgroundWorker_DoWork;
                 _backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
@@ -60,7 +63,10 @@ namespace Copy2Esemptia
                 var columnes = _formulari.Columnes;
                 var checks = _formulari.Checks;
                 for (var i = 0; i < columnes.Count; i++)
+                {
+                    _backgroundWorker.ReportProgress(i, 4);
                     Escriu(columnes[i], checks[i].Checked, i == columnes.Count - 1);
+                }
             }
             catch (Exception ex)
             {
@@ -121,6 +127,18 @@ namespace Copy2Esemptia
                 _formulari.chkNeteja.Show();
                 _formulari.chkEsborra.Show();
 
+                _formulari.nudColumnes.Enabled = true;
+                foreach (var txt in _formulari.Columnes)
+                {
+                    txt.ReadOnly = false;
+                    txt.BackColor = Color.White;
+                }
+                for (var i = 0; i < _formulari.Checks.Count; i++)
+                {
+                    _formulari.Checks[i].Enabled = true;
+                    _formulari.Columnes[i].Enabled = _formulari.Checks[i].Checked;
+                }
+
                 _formulari.lContador.Hide();
                 _formulari.barraProgres.Hide();
 
@@ -145,6 +163,11 @@ namespace Copy2Esemptia
                     _formulari.chkIngnora.Hide();
                     _formulari.chkNeteja.Hide();
                     _formulari.chkEsborra.Hide();
+                    _formulari.nudColumnes.Enabled = false;
+                    foreach (var txt in _formulari.Columnes)
+                        txt.ReadOnly = true;
+                    foreach (var chk in _formulari.Checks)
+                        chk.Enabled = false;
                 }
                 else if (e.UserState.Equals(1))
                 {
@@ -166,6 +189,13 @@ namespace Copy2Esemptia
                 else if (e.UserState.Equals(3))
                 {
                     _formulari.barraProgres.PerformStep();
+                }
+                else if (e.UserState.Equals(4))
+                {
+                    for (var i = 0; i < _formulari.Columnes.Count; i++)
+                        _formulari.Columnes[i].BackColor = i == e.ProgressPercentage
+                            ? Color.FromArgb(227, 242, 253)
+                            : Color.White;
                 }
             }
             catch (Exception ex)

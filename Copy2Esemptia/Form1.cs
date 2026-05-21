@@ -9,7 +9,7 @@ namespace Copy2Esemptia
 {
     public partial class Form1 : Form
     {
-        private const int AmpladeColumna = 30;
+        private const int AmpladeColumna = 40;
         private const int AmpladePanel = 260;
 
         public List<TextBox> Columnes { get; } = new List<TextBox>();
@@ -19,7 +19,7 @@ namespace Copy2Esemptia
         {
             InitializeComponent();
             nudColumnes.Maximum = Properties.Settings.Default.MaxColumnes;
-            AjustarColumnes(1);
+            AjustarColumnes(0);
         }
 
         private void AjustarColumnes(int nouNombre)
@@ -44,12 +44,12 @@ namespace Copy2Esemptia
             taula.ColumnCount = nouNombre + 1;
             while (taula.ColumnStyles.Count > 0)
                 taula.ColumnStyles.RemoveAt(0);
+            taula.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             for (var i = 0; i < nouNombre; i++)
                 taula.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, AmpladeColumna));
-            taula.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
 
-            // Mou panel1 a l'última columna
-            taula.SetColumn(panel1, nouNombre);
+            // panel1 sempre a la primera columna (esquerra)
+            taula.SetColumn(panel1, 0);
 
             // Crea els nous controls
             for (var i = 0; i < nouNombre; i++)
@@ -61,8 +61,11 @@ namespace Copy2Esemptia
                     Dock = DockStyle.Fill,
                     Multiline = true,
                     TextAlign = HorizontalAlignment.Center,
-                    Margin = new Padding(5),
+                    Margin = new Padding(2),
                     Enabled = estaActiu,
+                    BackColor = Color.White,
+                    ForeColor = Color.FromArgb(33, 33, 33),
+                    BorderStyle = BorderStyle.FixedSingle,
                 };
                 if (i == 0)
                     txt.TextChanged += TxtText_TextChanged;
@@ -74,12 +77,14 @@ namespace Copy2Esemptia
                     Dock = DockStyle.Fill,
                     Checked = estaActiu,
                     UseVisualStyleBackColor = true,
+                    BackColor = Color.White,
+                    Margin = new Padding(2),
                     Tag = i,
                 };
                 chk.CheckedChanged += Chk_CheckedChanged;
 
-                taula.Controls.Add(txt, i, 0);
-                taula.Controls.Add(chk, i, 1);
+                taula.Controls.Add(txt, i + 1, 0);
+                taula.Controls.Add(chk, i + 1, 1);
 
                 Columnes.Add(txt);
                 Checks.Add(chk);
@@ -146,6 +151,8 @@ namespace Copy2Esemptia
 
             if ((int)nudColumnes.Value != nombreColumnes)
                 nudColumnes.Value = nombreColumnes;
+            else if (Columnes.Count == 0)
+                AjustarColumnes(nombreColumnes);
 
             for (var col = 0; col < nombreColumnes; col++)
             {
