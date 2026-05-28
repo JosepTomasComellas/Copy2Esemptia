@@ -9,10 +9,10 @@ namespace Copy2Esemptia
 {
     public class Worker
     {
-        private readonly Form1 _formulari;
+        private readonly FormPrincipal _formulari;
         private BackgroundWorker _backgroundWorker;
 
-        public Worker(Form1 formulari)
+        public Worker(FormPrincipal formulari)
         {
             _formulari = formulari;
 

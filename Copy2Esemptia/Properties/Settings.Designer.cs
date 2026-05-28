@@ -31,10 +31,10 @@ namespace Copy2Esemptia.Properties {
                 return ((int)(this["Retard"]));
             }
         }
-
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
         public int MaxColumnes {
             get {
                 return ((int)(this["MaxColumnes"]));

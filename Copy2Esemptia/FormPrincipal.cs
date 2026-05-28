@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Copy2Esemptia
 {
-    public partial class Form1 : Form
+    public partial class FormPrincipal : Form
     {
         private const int AmpladeColumna = 40;
         private const int AmpladePanel = 260;
@@ -15,7 +15,7 @@ namespace Copy2Esemptia
         public List<TextBox> Columnes { get; } = new List<TextBox>();
         public List<CheckBox> Checks { get; } = new List<CheckBox>();
 
-        public Form1()
+        public FormPrincipal()
         {
             InitializeComponent();
             nudColumnes.Maximum = Properties.Settings.Default.MaxColumnes;

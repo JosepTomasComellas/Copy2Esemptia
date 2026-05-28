@@ -1,6 +1,6 @@
 namespace Copy2Esemptia
 {
-    partial class Form1
+    partial class FormPrincipal
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -17,7 +17,7 @@ namespace Copy2Esemptia
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             this.bEnganxar = new System.Windows.Forms.Button();
             this.bCarrega = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -117,8 +117,6 @@ namespace Copy2Esemptia
             // 
             this.chkIngnora.AutoSize = true;
             this.chkIngnora.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkIngnora.Checked = true;
-            this.chkIngnora.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkIngnora.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.chkIngnora.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
             this.chkIngnora.Location = new System.Drawing.Point(0, 210);
@@ -239,7 +237,7 @@ namespace Copy2Esemptia
             this.taula.Size = new System.Drawing.Size(351, 339);
             this.taula.TabIndex = 0;
             // 
-            // Form1
+            // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -249,10 +247,9 @@ namespace Copy2Esemptia
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "FormPrincipal";
             this.Padding = new System.Windows.Forms.Padding(10);
-            this.Text = "Copia les dades i enganxa-les a Esemptia";
+            this.Text = "Enganxa a Esemptia";
             this.TopMost = true;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
